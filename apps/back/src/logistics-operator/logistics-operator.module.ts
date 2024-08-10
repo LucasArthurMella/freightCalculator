@@ -8,5 +8,6 @@ import { LogisticsOperator, LogisticsOperatorSchema } from './entities/logistics
   imports:[MongooseModule.forFeature([{name: LogisticsOperator.name, schema: LogisticsOperatorSchema}])],
   controllers: [LogisticsOperatorController],
   providers: [LogisticsOperatorService],
+  exports: [LogisticsOperatorService]
 })
 export class LogisticsOperatorModule {}

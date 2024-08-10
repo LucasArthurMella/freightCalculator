@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { IsNotEmpty } from 'class-validator';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { LogisticsOperator } from 'src/logistics-operator/entities/logistics-operator.schema';
-import { FreightSimulationMinMax } from '../constants/min-max-values';
+import { FreightSimulationRequestMinMax } from '../constants/min-max-values';
 
 export type FreightSimulationDocument = HydratedDocument<FreightSimulation>;
 
@@ -11,25 +10,25 @@ export type FreightSimulationDocument = HydratedDocument<FreightSimulation>;
 class Address {
   @Prop({
     type: String,
-    minLength: FreightSimulationMinMax.AddressMinLength,
-    maxLength: FreightSimulationMinMax.AddressMaxLength,
+    minLength: FreightSimulationRequestMinMax.AddressMinLength,
+    maxLength: FreightSimulationRequestMinMax.AddressMaxLength,
     required: true
   })
   address: string;
 
   @Prop({
     type: String,
-    minLength: FreightSimulationMinMax.ZipCodeMinLength,
-    maxLength: FreightSimulationMinMax.ZipCodeMaxLength,
-    required: true
+    minLength: FreightSimulationRequestMinMax.ZipCodeMinLength,
+    maxLength: FreightSimulationRequestMinMax.ZipCodeMaxLength,
+    required: false 
   })
   zip_code: string;
 
   @Prop({
     type: String,
-    min: FreightSimulationMinMax.NumberMin,
-    max: FreightSimulationMinMax.NumberMax,
-    required: true
+    min: FreightSimulationRequestMinMax.NumberMinLength,
+    max: FreightSimulationRequestMinMax.NumberMaxLength,
+    required: false 
   })
   number: string;
 
@@ -40,46 +39,76 @@ class Product {
 
   @Prop({
     type: Number,
-    min: FreightSimulationMinMax.ProductHeightMinValue,
-    max: FreightSimulationMinMax.ProductHeightMaxValue,
+    min: FreightSimulationRequestMinMax.ProductHeightMinValue,
+    max: FreightSimulationRequestMinMax.ProductHeightMaxValue,
     required: true
   })
   height: number;
 
   @Prop({
     type: Number,
-    min: FreightSimulationMinMax.ProductWidthMinValue,
-    max: FreightSimulationMinMax.ProductWidthMaxValue,
+    min: FreightSimulationRequestMinMax.ProductWidthMinValue,
+    max: FreightSimulationRequestMinMax.ProductWidthMaxValue,
     required: true
   })
   width: number;
 
   @Prop({
     type: Number,
-    min: FreightSimulationMinMax.ProductLengthMinValue,
-    max: FreightSimulationMinMax.ProductLengthMaxValue,
+    min: FreightSimulationRequestMinMax.ProductLengthMinValue,
+    max: FreightSimulationRequestMinMax.ProductLengthMaxValue,
     required: true
   })
   length: number;
 
+  @Prop({
+    type: Number, 
+    min: FreightSimulationRequestMinMax.DistanceBetweenAdressesMin,
+    max: FreightSimulationRequestMinMax.DistanceBetweenAdressesMax,
+    required: true
+  })
+  distance_between_addresses: number; 
 
   @Prop({type: Address, required: true})
-  origin_adresses: Address;
+  origin_address: Address;
 
   @Prop({type: Address, required: true})
-  destination_adresses: Address;
+  destination_address: Address;
+}
+
+@Schema()
+export class LogisticsOperatorCalculatedData {
+  @Prop({ 
+    type: Number, 
+    min: FreightSimulationRequestMinMax.CalculatedPriceMin,
+    max: FreightSimulationRequestMinMax.CalculatedPriceMax,
+    required: true
+  })
+  price: number;
+
+  @Prop({ 
+    type: Number, 
+    min: FreightSimulationRequestMinMax.CalculatedPriceMin,
+    max: FreightSimulationRequestMinMax.CalculatedPriceMax,
+    required: true 
+  })
+  time_in_days: number;
 }
 
 @Schema()
 export class FreightSimulation {
 
-  @IsNotEmpty()
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'LogisticsOperator' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'LogisticsOperator', required: false })
   cheapest_logistics_operator: LogisticsOperator;
 
-  @IsNotEmpty()
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'LogisticsOperator' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'LogisticsOperator', required: false })
   fastest_logistics_operator: LogisticsOperator;
+
+  @Prop({ type: LogisticsOperatorCalculatedData, required: true })
+  logistics_operator1_calculated_data: LogisticsOperatorCalculatedData;
+
+  @Prop({ type: LogisticsOperatorCalculatedData, required: true })
+  logistics_operator2_calculated_data: LogisticsOperatorCalculatedData;
 
   @Prop({type: Product, required: true})
   product: Product

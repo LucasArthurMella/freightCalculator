@@ -1,4 +1,4 @@
-export enum FreightSimulationMinMax {
+export enum FreightSimulationRequestMinMax {
 
   ProductHeightMinValue=1,
   ProductHeightMaxValue=999999,
@@ -12,13 +12,18 @@ export enum FreightSimulationMinMax {
   AddressMinLength=3,
   AddressMaxLength=300,
 
-  ZipCodeMinLength=3,
-  ZipCodeMaxLength=300,
+  ZipCodeMinLength=8,
+  ZipCodeMaxLength=9,
 
-  NumberMin=3,
-  NumberMax=300,
+  NumberMinLength=1,
+  NumberMaxLength=7,
   
-  distanceBetweenAdressesMin=0,
-  distanceBetweenAdressesMax=30000
+  DistanceBetweenAdressesMin=0,
+  DistanceBetweenAdressesMax=30000,
+
+  CalculatedPriceMin=0,
+  CalculatedPriceMax=999999999
 
 }
+
+

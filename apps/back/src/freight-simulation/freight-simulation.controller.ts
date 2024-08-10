@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { FreightSimulationService } from './freight-simulation.service';
-import { CreateFreightSimulationDto } from './dto/create-freight-simulation.dto';
 import { UpdateFreightSimulationDto } from './dto/update-freight-simulation.dto';
+import { FreightSimulationRequestDto } from './dto/freight-simulation-request.dto';
+import { BothLogisticsOperatorExistGuard } from './guards/BothLogisticsOperatorsExist';
 
 @Controller('freight-simulation')
 export class FreightSimulationController {
   constructor(private readonly freightSimulationService: FreightSimulationService) {}
 
+  @UseGuards(BothLogisticsOperatorExistGuard)
   @Post()
-  create(@Body() createFreightSimulationDto: CreateFreightSimulationDto) {
-    return this.freightSimulationService.create(createFreightSimulationDto);
+  handleFreightRequestData(@Body() freightSimulationRequest: FreightSimulationRequestDto) {
+    return this.freightSimulationService.handleFreightRequestData(freightSimulationRequest);
   }
 
   @Get()
@@ -22,13 +24,4 @@ export class FreightSimulationController {
     return this.freightSimulationService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFreightSimulationDto: UpdateFreightSimulationDto) {
-    return this.freightSimulationService.update(+id, updateFreightSimulationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.freightSimulationService.remove(+id);
-  }
 }
