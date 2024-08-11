@@ -1,6 +1,6 @@
 import { IsMongoId, IsNotEmpty, IsNumber, IsNumberString, IsObject, IsOptional, IsString, Max, MaxLength, Min, MinLength, ValidateNested } from "class-validator";
 import { FreightSimulationRequestMinMax } from "../constants/min-max-values";
-import { GlobalMinMax } from "src/constants/min-max-values";
+import { GlobalMinMax } from "src/app/constants/min-max-values";
 import { Type } from "class-transformer";
 import { IsCEP } from "@clockinit/brazilian-class-validator";
 
