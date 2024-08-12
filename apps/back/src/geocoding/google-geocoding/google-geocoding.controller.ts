@@ -6,7 +6,7 @@ export class GoogleGeocodingController {
   constructor(private readonly googleGeocodingService: GoogleGeocodingService) {}
 
   @Get()
-  get() {
-    return this.googleGeocodingService.requestDistance("AaaaaaaaaaaA");
+  getCoordinates() {
+    return this.googleGeocodingService.getCoordinates("Rua Umuarama 277, Maringá PR");
   }
 }

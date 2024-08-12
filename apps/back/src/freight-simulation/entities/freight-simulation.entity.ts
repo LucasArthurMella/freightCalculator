@@ -5,16 +5,58 @@ import { FreightSimulationRequestMinMax } from '../constants/min-max-values';
 
 export type FreightSimulationDocument = HydratedDocument<FreightSimulation>;
 
+@Schema()
+class Coordinates {
+  @Prop({
+    type: Number,
+    min: FreightSimulationRequestMinMax.LatitudeMin,
+    max: FreightSimulationRequestMinMax.LatitudeMax,
+    required: true 
+  })
+  lat: number
+
+  @Prop({
+    type: Number,
+    min: FreightSimulationRequestMinMax.LongitudeMin,
+    max: FreightSimulationRequestMinMax.LongitudeMax,
+    required: true 
+  })
+  lng: number
+}
 
 @Schema()
 class Address {
   @Prop({
     type: String,
-    minLength: FreightSimulationRequestMinMax.AddressMinLength,
-    maxLength: FreightSimulationRequestMinMax.AddressMaxLength,
-    required: true
+    minLength: FreightSimulationRequestMinMax.StreetMinLength,
+    maxLength: FreightSimulationRequestMinMax.StreetMaxLength,
+    required: false 
   })
-  address: string;
+  street: string;
+
+  @Prop({
+    type: String,
+    min: FreightSimulationRequestMinMax.NumberMinLength,
+    max: FreightSimulationRequestMinMax.NumberMaxLength,
+    required: false 
+  })
+  number: string;
+
+  @Prop({
+    type: String,
+    min: FreightSimulationRequestMinMax.CityMinLength,
+    max: FreightSimulationRequestMinMax.CityMaxLength,
+    required: true 
+  })
+  city: string;
+
+  @Prop({
+    type: String,
+    min: FreightSimulationRequestMinMax.StateMinLength,
+    max: FreightSimulationRequestMinMax.StateMaxLength,
+    required: false 
+  })
+  state: string;
 
   @Prop({
     type: String,
@@ -25,12 +67,10 @@ class Address {
   zip_code: string;
 
   @Prop({
-    type: String,
-    min: FreightSimulationRequestMinMax.NumberMinLength,
-    max: FreightSimulationRequestMinMax.NumberMaxLength,
-    required: false 
+    type: Coordinates,
+    required: true
   })
-  number: string;
+  coordinates: Coordinates
 
 }
 

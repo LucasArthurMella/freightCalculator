@@ -5,26 +5,37 @@ import { Type } from "class-transformer";
 import { IsCEP } from "@clockinit/brazilian-class-validator";
 
 
-class Address {
-
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(FreightSimulationRequestMinMax.AddressMinLength)
-  @MaxLength(FreightSimulationRequestMinMax.AddressMaxLength)
-  address: string;
+export class Address {
 
   @IsOptional()
-  @IsCEP()
-  @MinLength(FreightSimulationRequestMinMax.ZipCodeMinLength)
-  @MaxLength(FreightSimulationRequestMinMax.ZipCodeMaxLength)
-  zip_code: string;
-
+  @IsString()
+  @MinLength(FreightSimulationRequestMinMax.StreetMinLength)
+  @MaxLength(FreightSimulationRequestMinMax.StreetMaxLength)
+  street: string;
 
   @IsOptional()
   @IsNumberString()
   @MinLength(FreightSimulationRequestMinMax.NumberMinLength)
   @MaxLength(FreightSimulationRequestMinMax.NumberMaxLength)
   number: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(FreightSimulationRequestMinMax.CityMinLength)
+  @MaxLength(FreightSimulationRequestMinMax.CityMaxLength)
+  city: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(FreightSimulationRequestMinMax.StateMinLength)
+  @MaxLength(FreightSimulationRequestMinMax.StateMaxLength)
+  state: string;
+
+  @IsOptional()
+  @IsCEP()
+  @MinLength(FreightSimulationRequestMinMax.ZipCodeMinLength)
+  @MaxLength(FreightSimulationRequestMinMax.ZipCodeMaxLength)
+  zip_code: string;
 
 }
 

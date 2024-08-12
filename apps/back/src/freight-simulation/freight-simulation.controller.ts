@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { FreightSimulationService } from './freight-simulation.service';
-import { UpdateFreightSimulationDto } from './dto/update-freight-simulation.dto';
 import { FreightSimulationRequestDto } from './dto/freight-simulation-request.dto';
 import { BothLogisticsOperatorExistGuard } from './guards/BothLogisticsOperatorsExist';
 
@@ -8,8 +7,8 @@ import { BothLogisticsOperatorExistGuard } from './guards/BothLogisticsOperators
 export class FreightSimulationController {
   constructor(private readonly freightSimulationService: FreightSimulationService) {}
 
-  @UseGuards(BothLogisticsOperatorExistGuard)
   @Post()
+  @UseGuards(BothLogisticsOperatorExistGuard)
   handleFreightRequestData(@Body() freightSimulationRequest: FreightSimulationRequestDto) {
     return this.freightSimulationService.handleFreightRequestData(freightSimulationRequest);
   }

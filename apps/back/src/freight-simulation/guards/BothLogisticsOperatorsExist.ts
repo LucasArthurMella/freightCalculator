@@ -1,5 +1,8 @@
 import { Injectable, CanActivate, ExecutionContext, BadRequestException } from '@nestjs/common';
+import { validate } from 'class-validator';
 import { LogisticsOperatorService } from 'src/logistics-operator/logistics-operator.service';
+import { FreightSimulationRequestDto } from '../dto/freight-simulation-request.dto';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class BothLogisticsOperatorExistGuard implements CanActivate {
@@ -9,6 +12,14 @@ export class BothLogisticsOperatorExistGuard implements CanActivate {
   ): Promise<boolean>  {
 
     const request = context.switchToHttp().getRequest();
+
+      const body = plainToClass(FreightSimulationRequestDto, request.body);
+      const errorMessages = await validate(body);
+      if(errorMessages.length > 0){
+        throw new BadRequestException(errorMessages);
+      }
+
+
     const logistics_operator1_id = request.body.logistics_operator1_id;
     const logistics_operator2_id = request.body.logistics_operator2_id;
 

@@ -4,9 +4,11 @@ import { AppService } from './app.service';
 import { FreightSimulationModule } from './../freight-simulation/freight-simulation.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LogisticsOperatorModule } from './../logistics-operator/logistics-operator.module';
-import { GoogleGeocodingModule } from './../google-geocoding/google-geocoding.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { config } from './config/config';
+import { GeocodingModule } from 'src/geocoding/geocoding.module';
+import { UserModule } from 'src/user/user.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { config } from './config/config';
     }),
     FreightSimulationModule, 
     LogisticsOperatorModule, 
-    GoogleGeocodingModule,
+    GeocodingModule,
+    UserModule,
+    AuthModule,
     ConfigModule.forRoot({
       load: [config],
       isGlobal: true,
