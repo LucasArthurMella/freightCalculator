@@ -14,6 +14,7 @@ export class GoogleGeocodingService extends Client implements GeocodingService {
     super();
   }
 
+  //Uses a full address to get a coordinate using google geocode api.
   async getCoordinates(fullAddress: string): Promise<LatLngLiteral> {
     let geocodingKey = this.configService.get("googleGeocodingApi");
     const googleRes = await this.geocode({
@@ -33,7 +34,9 @@ export class GoogleGeocodingService extends Client implements GeocodingService {
     }
 
   }
-
+  
+  // Uses geographic library to get distance between two coordinates and divides it by 1000
+  // to get it in km.
   getDistanceInKm(coordinate1: coordinates, coordinate2: coordinates): number {
     const distance = getDistance(
       { latitude: coordinate1.lat, longitude: coordinate1.lng },

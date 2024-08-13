@@ -4,7 +4,6 @@ import { UpdateLogisticsOperatorDto } from './dto/update-logistics-operator.dto'
 import { InjectModel } from '@nestjs/mongoose';
 import { LogisticsOperator } from './entities/logistics-operator.schema';
 import { Model } from 'mongoose';
-import { create } from 'domain';
 
 @Injectable()
 export class LogisticsOperatorService {
@@ -38,7 +37,7 @@ export class LogisticsOperatorService {
   // Given a certain distance and a certain logistics operator, the function loops through the rules until it finds
   // the min max criteria that matches to that given distance, if it finishes looping and no rule is returned (meaning
   // that the min max criteria are wrongly defined) it just returns the first rule of that logistic operator. The min
-  // is meant to be exclusive and the max inclusive
+  // is meant to be exclusive and the max inclusive.
 
   async getLogisticsOperatorDistanceRule(logisticsOperatorId: string, distance: number ){
     const logisticsOperator = await this.findOne(logisticsOperatorId);

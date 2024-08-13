@@ -7,7 +7,7 @@ import { GEOCODING_SERVICE } from './constants/general';
 @Module({})
 export class GeocodingModule {
 
-  static forRoot(serviceType: Values<typeof geoCodingServices>): DynamicModule{
+  static getProvider(serviceType: Values<typeof geoCodingServices>){
     let serviceProvider: Provider;
 
     switch(serviceType){
@@ -22,7 +22,11 @@ export class GeocodingModule {
           useClass: GoogleGeocodingService
         }
     }
+    return serviceProvider;
+  }
 
+  static forRoot(serviceType: Values<typeof geoCodingServices>): DynamicModule{
+    let serviceProvider = this.getProvider(serviceType);
     return {
       module: GeocodingModule,
       providers: [serviceProvider],
