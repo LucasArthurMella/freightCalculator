@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { FreightSimulationModule } from './../freight-simulation/freight-simulation.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LogisticsOperatorModule } from './../logistics-operator/logistics-operator.module';
@@ -29,7 +27,5 @@ import { AuthModule } from 'src/auth/auth.module';
       ignoreEnvFile: process.env.NODE_ENV === 'production',
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
