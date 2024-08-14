@@ -45,7 +45,7 @@ class DistanceRule {
   estimated_time_of_arrival: number;
 }
 
-@Schema()
+@Schema({timestamps: true})
 export class LogisticsOperator {
   @Prop({
     type: String,

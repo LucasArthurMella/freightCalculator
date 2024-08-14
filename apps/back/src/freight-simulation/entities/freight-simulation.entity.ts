@@ -135,7 +135,7 @@ export class LogisticsOperatorCalculatedData {
   time_in_days: number;
 }
 
-@Schema()
+@Schema({timestamps: true})
 export class FreightSimulation {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'LogisticsOperator', required: false })

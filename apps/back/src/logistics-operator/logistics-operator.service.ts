@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateLogisticsOperatorDto } from './dto/create-logistics-operator.dto';
 import { UpdateLogisticsOperatorDto } from './dto/update-logistics-operator.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { LogisticsOperator } from './entities/logistics-operator.schema';
-import { Model } from 'mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 
 @Injectable()
 export class LogisticsOperatorService {
@@ -20,16 +20,25 @@ export class LogisticsOperatorService {
   }
 
   async findOne(id: string) {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException('Invalid Mongo ObjectId');
+    }
     const foundLogisticsOperator = await this.logisticOperatorModel.findById(id);
     return foundLogisticsOperator;
   }
 
   async update(id: string, updateLogisticsOperatorDto: UpdateLogisticsOperatorDto) {
+    if (!isValidObjectId(id)) {
+     throw new BadRequestException('Invalid Mongo ObjectId');
+    }
     const updatedLogisticsOperator = await this.logisticOperatorModel.findByIdAndUpdate(id, updateLogisticsOperatorDto);
     return updatedLogisticsOperator;
   }
 
   async remove(id: string) {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException('Invalid Mongo ObjectId');
+    }
     const removedLogisticsOperator = await this.logisticOperatorModel.findByIdAndDelete(id);
     return removedLogisticsOperator;
   }

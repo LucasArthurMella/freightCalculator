@@ -11,7 +11,7 @@ const MainSidebar = (props: {burguerToggle: boolean, setBurguerToggle: any}) => 
 
   const colors = {
     active: "#1abc9c",
-    inactive: "#ecf0f1"
+    inactive: "lightblue"
   }
 
   function getItemColor(page: string){
@@ -24,7 +24,7 @@ const MainSidebar = (props: {burguerToggle: boolean, setBurguerToggle: any}) => 
         onBackdropClick={() => {closeSideBar()}}
         toggled={props.burguerToggle}
         backgroundColor="#212529"
-        style={{height: "100vh"}}
+        style={{minHeight: "100vh"}}
         breakPoint='md'
       >
         <div style={{ padding: '20px', textAlign: 'center', color: '#ecf0f1' }}>

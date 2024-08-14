@@ -20,7 +20,7 @@ export class FreightSimulationController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.freightSimulationService.findOne(+id);
+    return this.freightSimulationService.findOne(id);
   }
 
 }

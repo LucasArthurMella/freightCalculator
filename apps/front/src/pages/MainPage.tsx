@@ -6,11 +6,13 @@ import Home from './Home';
 import CalculateFreight from './CalculateFreight';
 import Historic from './Historic';
 import { useState } from 'react';
+import FreightSimulation from './FreightSimulation';
 
 const MainPage = () => {
   const [burguerToggle, setBurguerToggle] = useState(false);
 
   return(
+
     <Router>
       <Header setBurguerToggle={setBurguerToggle} />
       <div style={{ display: 'flex' }}>
@@ -23,6 +25,7 @@ const MainPage = () => {
             <Route path="/" element={ <Home />} />
             <Route path="/calculate-freight" element={< CalculateFreight />} />
             <Route path="/history" element={< Historic />} />
+            <Route path="/history/:id" element={< FreightSimulation />} />
           </Routes>
         </main>
       </div>

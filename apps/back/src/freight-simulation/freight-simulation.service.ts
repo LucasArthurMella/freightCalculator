@@ -1,7 +1,7 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FreightSimulation } from './entities/freight-simulation.entity';
-import { Model } from 'mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 import { Address, FreightSimulationRequestDto } from './dto/freight-simulation-request.dto';
 import { LogisticsOperatorService } from'src/logistics-operator/logistics-operator.service';
 import { FreightSimulationGeneral } from './constants/general';
@@ -152,11 +152,14 @@ export class FreightSimulationService {
   }
 
   async findAll() {
-    return await this.freightSimulationModel.find({});
+    return await this.freightSimulationModel.find({}).sort({createdAt: "desc"}).populate("cheapest_logistics_operator fastest_logistics_operator");
   }
 
-  async findOne(id: number) {
-    return await this.freightSimulationModel.findById(id);
+  async findOne(id: string) {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException('Invalid Mongo ObjectId');
+    }
+    return await this.freightSimulationModel.findById(id).populate("cheapest_logistics_operator fastest_logistics_operator");
   }
 
 }

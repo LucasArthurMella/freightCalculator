@@ -4,7 +4,7 @@ import { UserMinMax } from '../constants/min-max-values';
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema()
+@Schema({timestamps: true})
 export class User{
 
  @Prop({
