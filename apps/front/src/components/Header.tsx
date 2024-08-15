@@ -10,7 +10,9 @@ const Header = (props: {setBurguerToggle: any}) => {
         <Navbar.Brand 
           onClick={() => {props.setBurguerToggle((prevValue: boolean) => !prevValue)}} 
           style={{cursor: "pointer"}}  
-          className="d-block d-md-none"><GiHamburgerMenu/></Navbar.Brand>
+          className="d-block d-md-none">
+            <GiHamburgerMenu/>
+          </Navbar.Brand>
       </Container>
     </Navbar>     
   )

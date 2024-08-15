@@ -13,7 +13,7 @@ import { FreightSimulationGeneral } from './constants/general';
 
 describe('FreightSimulationService', () => {
   let service: FreightSimulationService;
-
+  let mockFindOneByBody = jest.fn();
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -22,16 +22,36 @@ describe('FreightSimulationService', () => {
         GeocodingModule.getProvider("google"),
         ConfigService,
         { provide: getModelToken(FreightSimulation.name), useValue: jest.fn() },
-        { provide: getModelToken(LogisticsOperator.name), useValue: jest.fn() },
+        { provide: getModelToken(LogisticsOperator.name), useValue: {findOne: mockFindOneByBody} },
       ],
     }).compile();
 
     service = module.get<FreightSimulationService>(FreightSimulationService);
+
+    mockFindOneByBody.mockImplementation(() => {
+      return Promise.resolve({
+        status: "Logistics operator does not exist, handling static logistics operator" 
+      });
+    });
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it("should return a normal logistics operator", async () => {
+    const mockLogisticsOperator = {
+      name: "Logistics Operator Example"
+    };
+    const logisticsOperator = await service.handleLogisticsOperatorExistance(mockLogisticsOperator as LogisticsOperatorDocument, 0);
+    expect(logisticsOperator).toEqual(mockLogisticsOperator);
+  });
+
+  it("should handle a static logistics operator instead of returning the same logistics operator (which is undefined)", async () => {
+    const logisticsOperator = await service.handleLogisticsOperatorExistance(undefined, 0);
+    expect(logisticsOperator).toEqual({status: "Logistics operator does not exist, handling static logistics operator"});
+  });
+
 
   it("should return appropriate full address with full address given", () => {
     const address: Address = new Address();

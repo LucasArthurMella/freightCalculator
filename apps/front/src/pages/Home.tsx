@@ -24,24 +24,23 @@ const Home = () => {
     <Card body bg="dark" text="light">
       <Container>
         <Card.Header as="h5">Home</Card.Header>
-          <Card.Body>
-            <Row>
-              <Col lg="3"></Col>
-              <Col>
-                <Card body style={cardInfoBodyStyle} text="white" >
-                  <Card.Header><h1 className="text-center"><strong>Informações Gerais</strong></h1></Card.Header>
-                    <Card.Body>
-                      <h1 className="text-center">Simulações Feitas: {freightSimulationAmount}</h1>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              <Col lg="3"></Col>
-            </Row>
-          </Card.Body>
-        </Container>
+        <Card.Body>
+          <Row>
+            <Col lg="3"></Col>
+            <Col>
+              <Card body style={cardInfoBodyStyle} text="white">
+                <Card.Header><h1 className="text-center"><strong>Informações Gerais</strong></h1></Card.Header>
+                <Card.Body>
+                  <h1 className="text-center">Simulações Feitas: {freightSimulationAmount}</h1>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col lg="3"></Col>
+          </Row>
+        </Card.Body>
+      </Container>
     </Card>
   )
 } 
-
 
 export default Home;

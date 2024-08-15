@@ -63,12 +63,12 @@ const CalculateFreight = () => {
     }
     let treatedReqBody = removeEmptyStringProperties(reqBody);
     sendData(treatedReqBody);
-    //console.log(treatedReqBody);
   }
 
   const sendData = async (body: any) => {
     try {
-      const response = await fetch("http://127.0.0.1:3000/api/v1/freight-simulation", {
+      const apiPort = VITE_API_PORT || "3000";
+      const response = await fetch("http://127.0.0.1:"+apiPort+"/api/v1/freight-simulation", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +99,6 @@ const CalculateFreight = () => {
           <Form onSubmit={handleSubmit}>
           <h3 className="mt-3"><TbRulerMeasure/> Dimensões do Produto (cm)</h3>
           <Row>
-
             <Col>
               <Form.Group className="mb-3" controlId="ControlInput1">
                 <Form.Label><FaTextHeight/> Altura</Form.Label>
@@ -132,84 +131,81 @@ const CalculateFreight = () => {
               </Row>
               <Row>
                 <Col xs="6">
-                <Form.Group className="mb-3" controlId="ControlInput5">
-                  <Form.Label><FaCity/> Cidade</Form.Label>
-                  <Form.Control required type="text" name="city" onChange={handleProductOriginAddressChange} value={productOriginAddress.city} minLength={1} maxLength={70} placeholder="Maringá" />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput5">
+                    <Form.Label><FaCity/> Cidade</Form.Label>
+                    <Form.Control required type="text" name="city" onChange={handleProductOriginAddressChange} value={productOriginAddress.city} minLength={1} maxLength={70} placeholder="Maringá" />
+                  </Form.Group>
                 </Col>
                 <Col xs="6">
-                <Form.Group className="mb-3" controlId="ControlInput6">
-                  <Form.Label><TbBuildingEstate/> Estado</Form.Label>
-                  <Form.Select name="state" onChange={handleProductOriginAddressChange} value={productOriginAddress.state}>
-                  <StatesOptions/> 
-                </Form.Select>                
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput6">
+                    <Form.Label><TbBuildingEstate/> Estado</Form.Label>
+                    <Form.Select name="state" onChange={handleProductOriginAddressChange} value={productOriginAddress.state}>
+                      <StatesOptions/> 
+                    </Form.Select>                
+                  </Form.Group>
                 </Col>
               </Row>
               <Row >
                 <Col xs="7">
-                <Form.Group className="mb-3" controlId="ControlInput7">
-                  <Form.Label><GiZipper/> Cep</Form.Label>
-                  <Form.Control type="text" name="zip_code" onChange={handleProductOriginAddressChange} value={productOriginAddress.zip_code} minLength={9} maxLength={9} placeholder="50730-685" />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput7">
+                    <Form.Label><GiZipper/> Cep</Form.Label>
+                      <Form.Control type="text" name="zip_code" onChange={handleProductOriginAddressChange} value={productOriginAddress.zip_code} minLength={9} maxLength={9} placeholder="50730-685" />
+                  </Form.Group>
                 </Col>
                 <Col xs="5">
-                <Form.Group className="mb-3" controlId="ControlInput8">
-                  <Form.Label><GoNumber/> Número</Form.Label>
-                  <Form.Control type="number" name="number" onChange={handleProductOriginAddressChange} value={productOriginAddress.number} min={1} max={9999} placeholder="281"/>
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput8">
+                    <Form.Label><GoNumber/> Número</Form.Label>
+                    <Form.Control type="number" name="number" onChange={handleProductOriginAddressChange} value={productOriginAddress.number} min={1} max={9999} placeholder="281"/>
+                  </Form.Group>
                 </Col>
               </Row>
-
             </Col>
-
             <Col xs="12" lg="6">
               <Row>
-              <h3 className="mt-3"><CgEditBlackPoint/> Endereço de Destino do Produto</h3>
-              <Form.Group className="mb-3" controlId="ControlInput9">
-                <Form.Label><FaRoad/> Logradouro</Form.Label>
-                <Form.Control type="text" name="street" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.street} minLength={3} maxLength={200} placeholder="Rua XXX da silva" />
-              </Form.Group>
+                <h3 className="mt-3"><CgEditBlackPoint/> Endereço de Destino do Produto</h3>
+                <Form.Group className="mb-3" controlId="ControlInput9">
+                  <Form.Label><FaRoad/> Logradouro</Form.Label>
+                  <Form.Control type="text" name="street" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.street} minLength={3} maxLength={200} placeholder="Rua XXX da silva" />
+                </Form.Group>
               </Row>
               <Row>
                 <Col xs="6">
-                <Form.Group className="mb-3" controlId="ControlInput10">
-                  <Form.Label><FaCity/> Cidade</Form.Label>
-                  <Form.Control required type="text" name="city" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.city} minLength={1} maxLength={70} placeholder="Maringá" />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput10">
+                    <Form.Label><FaCity/> Cidade</Form.Label>
+                    <Form.Control required type="text" name="city" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.city} minLength={1} maxLength={70} placeholder="Maringá" />
+                  </Form.Group>
                 </Col>
                 <Col xs="6">
-                <Form.Group className="mb-3" controlId="ControlInput11">
-                  <Form.Label><TbBuildingEstate/> Estado</Form.Label>
-                  <Form.Select name="state" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.state}>
-                  <StatesOptions/> 
-                </Form.Select>                
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput11">
+                    <Form.Label><TbBuildingEstate/> Estado</Form.Label>
+                    <Form.Select name="state" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.state}>
+                      <StatesOptions/> 
+                    </Form.Select>                
+                  </Form.Group>
                 </Col>
               </Row>
               <Row >
                 <Col xs="7">
-                <Form.Group className="mb-3" controlId="ControlInput12">
-                  <Form.Label><GiZipper/> Cep</Form.Label>
-                  <Form.Control type="text" name="zip_code" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.zip_code} minLength={9} maxLength={9} placeholder="50730-685" />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput12">
+                    <Form.Label><GiZipper/> Cep</Form.Label>
+                      <Form.Control type="text" name="zip_code" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.zip_code} minLength={9} maxLength={9} placeholder="50730-685" />
+                  </Form.Group>
                 </Col>
                 <Col xs="5">
-                <Form.Group className="mb-3" controlId="ControlInput13">
-                  <Form.Label><GoNumber/> Número</Form.Label>
-                  <Form.Control type="number" name="number" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.number} min={1} max={9999} placeholder="281" />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="ControlInput13">
+                    <Form.Label><GoNumber/> Número</Form.Label>
+                      <Form.Control type="number" name="number" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.number} min={1} max={9999} placeholder="281" />
+                  </Form.Group>
                 </Col>
               </Row>
-
             </Col>
           </Row>
             <Button className="mb-3" variant="primary" type="submit">
               Calcular 
             </Button>
           </Form>
-          </Card.Body>
-        </Container>
+        </Card.Body>
+      </Container>
     </Card>
   )
 } 

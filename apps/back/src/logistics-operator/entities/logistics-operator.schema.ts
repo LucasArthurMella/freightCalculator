@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, ObjectId, Types } from 'mongoose';
 import { LogisticsOperatorMinMax } from '../constants/min-max-values';
+import { GlobalMinMax } from 'src/app/constants/min-max-values';
 
 export type LogisticsOperatorDocument = HydratedDocument<LogisticsOperator>;
 
@@ -68,6 +69,14 @@ export class LogisticsOperator {
     required: true
   }])
   distance_rules: DistanceRule[];
+
+  @Prop({
+    type:Types.ObjectId,
+    minLength: GlobalMinMax.MongooseIdMinLength,
+    maxLength: GlobalMinMax.MongooseIdMaxLength,
+    required: false
+  })
+  static_logistics_operator_id: Types.ObjectId
 
 }
 

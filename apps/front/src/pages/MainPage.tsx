@@ -12,7 +12,6 @@ const MainPage = () => {
   const [burguerToggle, setBurguerToggle] = useState(false);
 
   return(
-
     <Router>
       <Header setBurguerToggle={setBurguerToggle} />
       <div style={{ display: 'flex' }}>
