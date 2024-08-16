@@ -4,8 +4,9 @@
   "description": "This project is a freight calculator that chooses between two logistics operators which one has the lowest price and takes the least amount of time to deliver given a source address, a destination address, and product information (dimensions). The project also stores all queries in a database so that they can be consulted later. The frontend is made with ReactJS packaged by Vite and the backend is made with NestJS.",
   "scripts": {
     "install-all": "npm --prefix ./apps/back install & npm --prefix ./apps/front install",
+    "build-all": "npm --prefix ./apps/back run build & npm --prefix ./apps/front run build",
     "start-all:dev": "npm --prefix ./apps/back run start:dev & npm --prefix ./apps/front run dev",
-    "start-all:prod": "npm --prefix ./apps/back run build && npm --prefix ./apps/back run start:prod & npm --prefix ./apps/front run build && npm --prefix ./apps/front run preview -- --host"
+    "start-all:prod": "npm --prefix ./apps/back run start:prod & npm --prefix ./apps/front run preview -- --host"
     },
   "repository": {
     "type": "git",
