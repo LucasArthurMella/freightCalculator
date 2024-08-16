@@ -7,11 +7,11 @@ const Home = () => {
     backgroundColor: "#2b3136",
     height: "100%"
   }
-  
-  const [freightSimulationAmount, setFreightSimulationAmount] = useState(0);
 
+  const [freightSimulationAmount, setFreightSimulationAmount] = useState(0);
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/api/v1/freight-simulation", {method: "GET"})
+    const apiUrl = import.meta.env.VITE_API_URL;
+    fetch(`${apiUrl}/api/v1/freight-simulation`, {method: "GET"})
     .then((res) => {
       return res.json();
     }) 

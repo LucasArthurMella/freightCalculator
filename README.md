@@ -28,8 +28,11 @@ Para o frontend:
   npm install
 ```
 
+Para instalar os dois ao mesmo tempo:
 
-
+```bash
+  npm run install-all
+```
 
 ## Variáveis de Ambiente
 
@@ -47,6 +50,9 @@ Para rodar este projeto, para o backend você precisará adicionar e preencher n
 
 `JWT_EXPIRE_TIME`
 
+E para o frontend você precisará adicionar e preenchar na raíz da pasta apps/front em um arquivo .env as seguintes variáveis de ambiente:
+
+`VITE_API_URL`
 ## Rodar o projeto com o Docker
 
 Certifique-se de ter o Docker e o Docker Compose instalados e rodando, e então execute estes comandos na raíz do projeto:
@@ -73,9 +79,10 @@ Para o frontend:
   npm run dev
 ```
 
-Se quiser rodar os dois ao mesmo tempo no mesmo terminal, instale os pacotes dos dois repositórios e execute estes comandos na raíz do projeto:
+Se quiser rodar os dois ao mesmo tempo no mesmo terminal: 
 
 ```bash
+  npm run install-all
   npm run start-all:dev
 ```
 ## Rodar o Projeto em Produção localmente
@@ -100,9 +107,11 @@ Para o frontend:
   npm run preview -- --host
 ```
 
-Se quiser rodar os dois ao mesmo tempo no mesmo terminal, instale os pacotes dos dois repositórios e execute estes comandos na raíz do projeto:
+Se quiser rodar os dois ao mesmo tempo no mesmo terminal:
 
 ```bash
+  npm run install-all
+  npm run build-all
   npm run start-all:prod
 ```
 ## Rodando Testes

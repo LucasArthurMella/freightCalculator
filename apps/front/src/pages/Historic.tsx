@@ -12,8 +12,8 @@ const Historic = () => {
 
   const [freightSimulations, setFreightSimulations] = useState<[IFreightSimulation] | []>([]);
   useEffect(() => {
-    const apiPort = VITE_API_PORT || "3000";
-    fetch("http://127.0.0.1:"+apiPort+"/api/v1/freight-simulation", {method: "GET"})
+    const apiUrl = import.meta.env.VITE_API_URL;
+    fetch(`${apiUrl}/api/v1/freight-simulation`, {method: "GET"})
     .then((res) => {
       return res.json();
     }) 

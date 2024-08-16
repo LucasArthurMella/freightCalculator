@@ -67,8 +67,8 @@ const CalculateFreight = () => {
 
   const sendData = async (body: any) => {
     try {
-      const apiPort = VITE_API_PORT || "3000";
-      const response = await fetch("http://127.0.0.1:"+apiPort+"/api/v1/freight-simulation", {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${apiUrl}/api/v1/freight-simulation`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
