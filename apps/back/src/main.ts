@@ -27,14 +27,13 @@ async function bootstrap() {
 
   const port = configService.get('port') || 3000;
 
-
   const config = new DocumentBuilder()
     .setTitle('Freight Simulator Backend API')
     .setDescription('This API serves to process data related to the freight simulator, it has both the logic to handle the address data to calculate this freight, and the integration to the google geocode api to get the distance.')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup(globalPrefix, app, document);
 
   await app.listen(port);
 
