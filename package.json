@@ -1,0 +1,26 @@
+{
+  "name": "freightcalculator",
+  "version": "1.0.0",
+  "description": "This project is a freight calculator that chooses between two logistics operators which one has the lowest price and takes the least amount of time to deliver given a source address, a destination address, and product information (dimensions). The project also stores all queries in a database so that they can be consulted later. The frontend is made with ReactJS packaged by Vite and the backend is made with NestJS.",
+  "scripts": {
+    "start-all:dev": "npm --prefix ./apps/back run start:dev & npm --prefix ./apps/front run dev",
+    "start-all:prod": "npm --prefix ./apps/back run build && npm --prefix ./apps/back run start:prod & npm --prefix ./apps/front run build && npm --prefix ./apps/front run preview -- --host"
+    },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasArthurMella/freightCalculator.git"
+  },
+  "keywords": [
+    "freight",
+    "nestjs",
+    "vite",
+    "react",
+    "geocoding"
+  ],
+  "author": "Lucas Mella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasArthurMella/freightCalculator/issues"
+  },
+  "homepage": "https://github.com/LucasArthurMella/freightCalculator#readme"
+}

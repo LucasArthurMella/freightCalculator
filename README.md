@@ -12,6 +12,7 @@ Esse projeto é um calculador de frete que escolhe entre dois operadores logíst
 
 
 ## Instalação
+É necessário ter Node.js 22+ instalado para instalar e rodar o programa.
 
 Para o backend:
 
@@ -46,7 +47,15 @@ Para rodar este projeto, para o backend você precisará adicionar e preencher n
 
 `JWT_EXPIRE_TIME`
 
-## Rodar o Projeto em Desenvolvimento
+## Rodar o projeto com o Docker
+
+Certifique-se de ter o Docker e o Docker Compose instalados e rodando, e então execute estes comandos na raíz do projeto:
+
+```bash
+  docker-compose build
+  docker-compose up
+```
+## Rodar o Projeto em Desenvolvimento localmente
 
 Para o backend:
 
@@ -64,8 +73,14 @@ Para o frontend:
   npm run dev
 ```
 
+Se quiser rodar os dois ao mesmo tempo no mesmo terminal, instale os pacotes dos dois repositórios e execute estes comandos na raíz do projeto:
 
-## Rodar o Projeto em Produção
+```bash
+  npm run start-all:dev
+```
+## Rodar o Projeto em Produção localmente
+
+Caso esteja no linux certifique-se de ter permissões sudo para realizar os builds
 
 Para o backend:
 
@@ -82,9 +97,15 @@ Para o frontend:
   cd apps/front
   npm install
   npm run build
-  npm run preview
+  npm run preview -- --host
 ```
-## Rodando testes
+
+Se quiser rodar os dois ao mesmo tempo no mesmo terminal, instale os pacotes dos dois repositórios e execute estes comandos na raíz do projeto:
+
+```bash
+  npm run start-all:prod
+```
+## Rodando Testes
 
 Para rodar os testes do backend em Jest, execute os seguintes comandos:
 

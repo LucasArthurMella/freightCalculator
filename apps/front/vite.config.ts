@@ -7,7 +7,9 @@ export default defineConfig({
   server: {
     port: 4200
   },
-
+  preview: {
+    port: 4200
+  },
   define: {
     VITE_API_PORT: JSON.stringify("3000")
   }
