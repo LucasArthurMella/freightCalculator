@@ -124,7 +124,7 @@ const CalculateFreight = () => {
               <h3 className="mt-3"><MdTripOrigin/> Endereço de Origem do Produto</h3>
               <Form.Group className="mb-3" controlId="ControlInput4">
                 <Form.Label><FaRoad/> Logradouro</Form.Label>
-                <Form.Control type="text" name="street" onChange={handleProductOriginAddressChange} value={productOriginAddress.street} minLength={3} maxLength={200} placeholder="Rua XXX da silva" />
+                <Form.Control type="text" name="street" onChange={handleProductOriginAddressChange} value={productOriginAddress.street} minLength={3} maxLength={300} placeholder="Rua XXX da silva" />
               </Form.Group>
               </Row>
               <Row>
@@ -163,7 +163,7 @@ const CalculateFreight = () => {
                 <h3 className="mt-3"><CgEditBlackPoint/> Endereço de Destino do Produto</h3>
                 <Form.Group className="mb-3" controlId="ControlInput9">
                   <Form.Label><FaRoad/> Logradouro</Form.Label>
-                  <Form.Control type="text" name="street" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.street} minLength={3} maxLength={200} placeholder="Rua XXX da silva" />
+                  <Form.Control type="text" name="street" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.street} minLength={3} maxLength={300} placeholder="Rua XXX da silva" />
                 </Form.Group>
               </Row>
               <Row>

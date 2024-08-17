@@ -1,12 +1,12 @@
 export enum FreightSimulationRequestMinMax {
 
-  ProductHeightMinValue=1,
+  ProductHeightMinValue=0.1,
   ProductHeightMaxValue=999999,
 
-  ProductWidthMinValue=1,
+  ProductWidthMinValue=0.1,
   ProductWidthMaxValue=999999,
 
-  ProductLengthMinValue=1,
+  ProductLengthMinValue=0.1,
   ProductLengthMaxValue=999999,
 
   StreetMinLength=3,
