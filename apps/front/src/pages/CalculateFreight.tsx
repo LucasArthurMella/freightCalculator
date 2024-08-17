@@ -1,7 +1,6 @@
 import { Form, Row, Col, Container, Button } from "react-bootstrap"
 import Card from 'react-bootstrap/Card';
 import {  FormEvent, useState } from "react";
-import { cepMask } from "../util/masks";
 import StatesOptions from "../components/StatesOptions";
 import { removeEmptyStringProperties } from "../util/general";
 import { TbBuildingEstate, TbRulerMeasure } from "react-icons/tb";
@@ -12,6 +11,7 @@ import { BsBorderWidth } from "react-icons/bs";
 import { GiZipper } from "react-icons/gi";
 import { GoNumber } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import InputMask from 'react-input-mask';
 
 const CalculateFreight = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const CalculateFreight = () => {
     let {name, value} = e.target 
     setProductOriginAddress((prevData) => ({
       ...prevData,
-      [name]: name == "cep" ? cepMask(value) : value 
+      [name]: value 
     }))
   } 
 
@@ -39,7 +39,7 @@ const CalculateFreight = () => {
     let {name, value} = e.target 
     setProductDestinationAddress((prevData) => ({
       ...prevData,
-      [name]: name == "cep" ? cepMask(value) : value 
+      [name]: value 
     }))
   } 
 
@@ -76,11 +76,10 @@ const CalculateFreight = () => {
         body: JSON.stringify(body)
       })
       const result = await response.json();
-      console.log(result);
 
       if (result.message == "Coordinates not found with provided address!"){
-        alert("Um dos endereços que você passou não existe!");
-      }else if(result.statusCode == 500 || result.statusCode == 500){
+        alert("Um dos endereços que você passou não existe ou não foi encontrado! Tente fornecer mais informações.");
+      }else if(result.statusCode < 600 && result.statusCode >= 400){
         alert("Algo deu errado ao tentar fazer o cálculo, tente novamente mais tarde!");
       }else{      
         navigate(`/history/${result._id}`);
@@ -89,7 +88,6 @@ const CalculateFreight = () => {
       alert("Algo deu errado ao tentar fazer o cálculo, tente novamente mais tarde!");
     }
   }
-
 
   return(
     <Card body bg="dark" text="light">
@@ -149,7 +147,7 @@ const CalculateFreight = () => {
                 <Col xs="7">
                   <Form.Group className="mb-3" controlId="ControlInput7">
                     <Form.Label><GiZipper/> Cep</Form.Label>
-                      <Form.Control type="text" name="zip_code" onChange={handleProductOriginAddressChange} value={productOriginAddress.zip_code} minLength={9} maxLength={9} placeholder="50730-685" />
+                      <Form.Control mask="99999-999" maskChar={null} as={InputMask} type="text" name="zip_code" onChange={handleProductOriginAddressChange} value={productOriginAddress.zip_code} pattern=".{9,9}" minLength={9} maxLength={9} placeholder="50730-685" />
                   </Form.Group>
                 </Col>
                 <Col xs="5">
@@ -188,7 +186,7 @@ const CalculateFreight = () => {
                 <Col xs="7">
                   <Form.Group className="mb-3" controlId="ControlInput12">
                     <Form.Label><GiZipper/> Cep</Form.Label>
-                      <Form.Control type="text" name="zip_code" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.zip_code} minLength={9} maxLength={9} placeholder="50730-685" />
+                      <Form.Control mask="99999-999" maskChar={null} as={InputMask} type="text" name="zip_code" onChange={handleProductDestinationAddressChange} value={productDestinationAddress.zip_code} pattern=".{9,9}" minLength={9} maxLength={9} placeholder="50730-685" />
                   </Form.Group>
                 </Col>
                 <Col xs="5">
